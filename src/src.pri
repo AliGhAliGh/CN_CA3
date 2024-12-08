@@ -4,27 +4,30 @@ CONFIG += no_keywords
 CONFIG += c++20
 
 INCLUDEPATH += $$PWD\Globals
+# INCLUDEPATH += C:/boost/boost_1_82_0/
+
+# LIBS += -LC:/boost/boost_1_82_0/libs/
 
 SOURCES += \
-    $$PWD/DHCPServer/DHCPServer.cpp \
+    # $$PWD/DHCPServer/DHCPServer.cpp \
     $$PWD/EventsCoordinator/EventsCoordinator.cpp \
+    $$PWD/EventsCoordinator/datagenerator.cpp \
     $$PWD/IP/IP.cpp \
     $$PWD/IP/macaddress.cpp \
     $$PWD/IP/macaddressgenerator.cpp \
     $$PWD/Packets/packet.cpp \
-    $$PWD/PortBindingManager/PortBindingManager.cpp \
-    $$PWD/Port/Port.cpp \
-    $$PWD/Packets/Packet.cpp \
+    # $$PWD/PortBindingManager/PortBindingManager.cpp \
+    # $$PWD/Port/Port.cpp \
     $$PWD/main.cpp
 
 HEADERS += \
-    $$PWD/DHCPServer/DHCPServer.h \
+    # $$PWD/DHCPServer/DHCPServer.h \
     $$PWD/EventsCoordinator/EventsCoordinator.h \
+    $$PWD/EventsCoordinator/datagenerator.h \
     $$PWD/Globals/Globals.h \
     $$PWD/IP/IP.h \
     $$PWD/IP/macaddress.h \
     $$PWD/IP/macaddressgenerator.h \
     $$PWD/Packets/packet.h \
-    $$PWD/PortBindingManager/PortBindingManager.h \
-    $$PWD/Port/Port.h \
-    $$PWD/Packets/Packet.h \
+    # $$PWD/PortBindingManager/PortBindingManager.h \
+    # $$PWD/Port/Port.h \

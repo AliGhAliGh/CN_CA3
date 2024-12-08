@@ -1,6 +1,8 @@
 #ifndef EVENTSCOORDINATOR_H
 #define EVENTSCOORDINATOR_H
 
+#include "src/EventsCoordinator/datagenerator.h"
+
 #include <QObject>
 #include <QThread>
 
@@ -14,14 +16,15 @@ public:    // constructors
     EventsCoordinator(const EventsCoordinator &other) = delete;
 
 public:    // methods
-    static void               init(Millis millis);
+    static void               init(int millis);
     static EventsCoordinator *instance();
 
 public:    // getter and setters
 Q_SIGNALS:
-    void clock();
+    void global_tick(unsigned long long num);
 
 public Q_SLOTS:
+    void clock();
 
 private Q_SLOTS:
 
@@ -31,6 +34,8 @@ private:
 private:    // members
     static EventsCoordinator *instancePtr;
     static std::mutex         mtx;
+    static unsigned long long num;
+    static DataGenerator      dataGenerator;
 };
 
 #endif    // EVENTSCOORDINATOR_H

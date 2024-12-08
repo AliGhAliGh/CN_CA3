@@ -2,7 +2,6 @@
 #define GLOBALS_H
 
 #include <cstdint>
-
 #include <QSharedPointer>
 
 namespace UT

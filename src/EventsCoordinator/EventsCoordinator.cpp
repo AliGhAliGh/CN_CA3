@@ -1,23 +1,34 @@
 #include "EventsCoordinator.h"
 
+#include <iostream>
 #include <mutex>
 
 #include <QTimer>
 
 EventsCoordinator *EventsCoordinator::instancePtr = nullptr;
 std::mutex         EventsCoordinator::mtx;
+unsigned long long EventsCoordinator::num;
+DataGenerator      EventsCoordinator::dataGenerator(Distribution::Poisson);
 
 EventsCoordinator::EventsCoordinator(QThread *parent) :
     QThread {parent}
 {}
 
 void
-EventsCoordinator::init(Millis millis)
+EventsCoordinator::init(int millis)
 {
     QTimer *timer = new QTimer();
     instance();
     connect(timer, &QTimer::timeout, instance(), &EventsCoordinator::clock);
-    timer->start(millis);
+    timer->start(Millis(millis));
+}
+
+void
+EventsCoordinator::clock()
+{
+    auto data = EventsCoordinator::dataGenerator.generate(num++);
+    std::cout << "call: " << data << std::endl;
+    Q_EMIT global_tick(data);
 }
 
 EventsCoordinator *
