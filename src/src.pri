@@ -16,9 +16,12 @@ SOURCES += \
     $$PWD/IP/macaddress.cpp \
     $$PWD/IP/macaddressgenerator.cpp \
     $$PWD/Packets/packet.cpp \
-    # $$PWD/PortBindingManager/PortBindingManager.cpp \
-    # $$PWD/Port/Port.cpp \
-    $$PWD/main.cpp
+    $$PWD/PortBindingManager/PortBindingManager.cpp \
+    $$PWD/Port/Port.cpp \
+    $$PWD/Topology/autonomoussystem.cpp \
+    $$PWD/Topology/topologybuilder.cpp \
+    $$PWD/main.cpp \
+    $$PWD/node.cpp
 
 HEADERS += \
     # $$PWD/DHCPServer/DHCPServer.h \
@@ -29,5 +32,8 @@ HEADERS += \
     $$PWD/IP/macaddress.h \
     $$PWD/IP/macaddressgenerator.h \
     $$PWD/Packets/packet.h \
-    # $$PWD/PortBindingManager/PortBindingManager.h \
-    # $$PWD/Port/Port.h \
+    $$PWD/PortBindingManager/PortBindingManager.h \
+    $$PWD/Port/Port.h \
+    $$PWD/Topology/autonomoussystem.h \
+    $$PWD/Topology/topologybuilder.h \
+    $$PWD/node.h

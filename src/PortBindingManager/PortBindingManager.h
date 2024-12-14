@@ -24,6 +24,9 @@ Q_SIGNALS:
                         uint8_t port2, bool bind);
 
 private:
+    void                              bindHalf(PortPtr_t from, PortPtr_t to);
+    bool                              unbindHalf(PortPtr_t from, PortPtr_t to);
+
     QMap<PortPtr_t, QList<PortPtr_t>> bindings;
 };
 

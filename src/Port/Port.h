@@ -10,8 +10,9 @@ class Port : public QObject
     Q_OBJECT
 
 public:
-    explicit Port(QObject *parent = nullptr);
+    explicit Port(bool isRouter, AbstractIP *ip, uint8_t number, QObject *parent = nullptr);
     ~Port() override;
+    bool isRouterPort();
 
 Q_SIGNALS:
     void packetSent(const PacketPtr_t &data);
@@ -24,7 +25,8 @@ public Q_SLOTS:
 private:
     uint8_t  m_number;
     uint64_t m_numberOfPacketsSent;
-    QString  m_routerIP;
+    bool        m_isRouter;
+    AbstractIP *m_iP;
 };
 
 typedef QSharedPointer<Port> PortPtr_t;

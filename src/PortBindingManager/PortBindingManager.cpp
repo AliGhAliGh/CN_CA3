@@ -1,5 +1,7 @@
 #include "PortBindingManager.h"
 
+#include "qdebug.h"
+
 PortBindingManager::PortBindingManager(QObject *parent) :
     QObject {parent}
 {}
@@ -7,11 +9,45 @@ PortBindingManager::PortBindingManager(QObject *parent) :
 void
 PortBindingManager::bind(const PortPtr_t &port1, const PortPtr_t &port2)
 {
-    // simulate full-duplex communication
-    // connect(port1.get(), &Port::packetSent, port2.get(), &Port::receivePacket);
-    // connect(port2.get(), &Port::packetSent, port1.get(), &Port::receivePacket);
+    bindHalf(port1, port2);
+    bindHalf(port2, port1);
 }
 
 bool
 PortBindingManager::unbind(const PortPtr_t &port1, const PortPtr_t &port2)
-{}
+{
+    if(unbindHalf(port1, port2))
+        if(unbindHalf(port2, port1)) return true;
+    return false;
+}
+
+void
+PortBindingManager::bindHalf(PortPtr_t from, PortPtr_t to)
+{
+    connect(from.get(), &Port::packetSent, to.get(), &Port::receivePacket);
+    if(bindings.contains(from))
+    {
+        auto list = bindings[from];
+        if(list.contains(to))
+            qDebug() << "Port Already Binded!";
+        else if(list.size() > 0 && to->isRouterPort())
+            qDebug() << "Bad Router Binding!";
+        else
+            list.append(to);
+    }
+    else
+        bindings[from] = *new QList<PortPtr_t>({to});
+}
+
+bool
+PortBindingManager::unbindHalf(PortPtr_t from, PortPtr_t to)
+{
+    if(bindings.contains(from) && bindings[from].contains(to))
+    {
+        disconnect(from.get(), &Port::packetSent, to.get(), &Port::receivePacket);
+        bindings[from].removeOne(to);
+        return true;
+    }
+    qDebug() << "Binding Not Exist!";
+    return false;
+}

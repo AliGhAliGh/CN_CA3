@@ -1,15 +1,26 @@
 #include "Port.h"
 
-Port::Port(QObject *parent) :
+Port::Port(bool isRouter, AbstractIP *ip, uint8_t number, QObject *parent) :
     QObject {parent}
-{}
+{
+    m_number   = number;
+    m_iP       = ip;
+    m_isRouter = isRouter;
+}
 
 Port::~Port() {}
+
+bool
+Port::isRouterPort()
+{
+    return m_isRouter;
+}
 
 void
 Port::sendPacket(const PacketPtr_t &data)
 {
     ++m_numberOfPacketsSent;
+    Q_EMIT packetSent(data);
 }
 
 void
