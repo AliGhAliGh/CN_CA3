@@ -1,7 +1,7 @@
 #ifndef TOPOLOGYBUILDER_H
 #define TOPOLOGYBUILDER_H
 
-#include "src/PortBindingManager/PortBindingManager.h"
+#include "src/Port/PortBindingManager.h"
 #include "src/Topology/autonomoussystem.h"
 
 #include <QObject>
@@ -25,10 +25,12 @@ public:
 Q_SIGNALS:
 
 private:
-    static void                    setRouters(AutonomousSystem &as, const QJsonObject data);
+    static void setRouters(AutonomousSystem &as, const QJsonObject &data);
+    static void setPCs(AutonomousSystem &as, const QJsonObject &data);
+    static void connectASs(AutonomousSystem &as1, AutonomousSystem &as2, const QJsonObject &data);
 
-    static QList<AutonomousSystem> m_autonomousSystems;
-    static PortBindingManager      m_binder;
+    static QList<ASPtr_t>     m_autonomousSystems;
+    static PortBindingManager m_binder;
 };
 
 #endif    // TOPOLOGYBUILDER_H

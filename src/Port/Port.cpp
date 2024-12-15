@@ -6,6 +6,7 @@ Port::Port(bool isRouter, AbstractIP *ip, uint8_t number, QObject *parent) :
     m_number   = number;
     m_iP       = ip;
     m_isRouter = isRouter;
+    IsFree     = true;
 }
 
 Port::~Port() {}

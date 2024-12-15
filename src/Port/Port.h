@@ -10,7 +10,10 @@ class Port : public QObject
     Q_OBJECT
 
 public:
+    bool IsFree;
+
     explicit Port(bool isRouter, AbstractIP *ip, uint8_t number, QObject *parent = nullptr);
+
     ~Port() override;
     bool isRouterPort();
 

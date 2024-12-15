@@ -13,6 +13,12 @@ public:
 
     PortPtr_t getPort(int id);
 
+    PortPtr_t getFreePort();
+
+    PortPtr_t setBGP();
+
+    void      setBroken(bool isBroken = true);
+
 private:
     uint8_t            m_id;
     QVector<PortPtr_t> m_ports;

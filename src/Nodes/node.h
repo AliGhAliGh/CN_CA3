@@ -7,7 +7,12 @@
 class Node : public QThread
 {
 public:
-    explicit Node(QObject *parent = nullptr);
+    explicit Node(uint8_t id, QObject *parent = nullptr);
+
+    uint8_t getId();
+
+private:
+    uint8_t m_id;
 };
 
 typedef QSharedPointer<Node> NodePtr_t;

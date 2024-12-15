@@ -14,3 +14,17 @@ AutonomousSystem::SetRouters(QVector<RouterPtr_t> routers)
         m_nodes.append(routers[i]);
     }
 }
+
+uint8_t
+AutonomousSystem::getId()
+{
+    return m_id;
+}
+
+RouterPtr_t
+AutonomousSystem::GetRouter(uint8_t id)
+{
+    for(NodePtr_t &node : m_nodes)
+        if(node->getId() == id) return node.dynamicCast<Router>();
+    return nullptr;
+}

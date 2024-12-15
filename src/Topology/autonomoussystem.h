@@ -13,13 +13,19 @@ class AutonomousSystem : public QObject
 public:
     explicit AutonomousSystem(uint8_t id, QObject *parent = nullptr);
 
-    void SetRouters(QVector<RouterPtr_t> routers);
+    void        SetRouters(QVector<RouterPtr_t> routers);
+
+    uint8_t     getId();
+
+    RouterPtr_t GetRouter(uint8_t id);
 
 Q_SIGNALS:
 
 private:
     QList<NodePtr_t> m_nodes;
-    uint8_t     m_id;
+    uint8_t          m_id;
 };
+
+typedef QSharedPointer<AutonomousSystem> ASPtr_t;
 
 #endif    // AUTONOMOUSSYSTEM_H

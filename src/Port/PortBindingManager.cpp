@@ -33,7 +33,10 @@ PortBindingManager::bindHalf(PortPtr_t from, PortPtr_t to)
         else if(list.size() > 0 && to->isRouterPort())
             qDebug() << "Bad Router Binding!";
         else
+        {
             list.append(to);
+            to->IsFree = from->IsFree = false;
+        }
     }
     else
         bindings[from] = *new QList<PortPtr_t>({to});
@@ -46,6 +49,7 @@ PortBindingManager::unbindHalf(PortPtr_t from, PortPtr_t to)
     {
         disconnect(from.get(), &Port::packetSent, to.get(), &Port::receivePacket);
         bindings[from].removeOne(to);
+        to->IsFree = from->IsFree = true;
         return true;
     }
     qDebug() << "Binding Not Exist!";

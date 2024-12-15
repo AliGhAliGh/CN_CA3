@@ -15,9 +15,10 @@ SOURCES += \
     $$PWD/IP/IP.cpp \
     $$PWD/IP/macaddress.cpp \
     $$PWD/IP/macaddressgenerator.cpp \
+    $$PWD/Nodes/pc.cpp \
     $$PWD/Nodes/router.cpp \
     $$PWD/Packets/packet.cpp \
-    $$PWD/PortBindingManager/PortBindingManager.cpp \
+    $$PWD/Port/PortBindingManager.cpp \
     $$PWD/Port/Port.cpp \
     $$PWD/Topology/autonomoussystem.cpp \
     $$PWD/Topology/topologybuilder.cpp \
@@ -32,9 +33,10 @@ HEADERS += \
     $$PWD/IP/IP.h \
     $$PWD/IP/macaddress.h \
     $$PWD/IP/macaddressgenerator.h \
+    $$PWD/Nodes/pc.h \
     $$PWD/Nodes/router.h \
     $$PWD/Packets/packet.h \
-    $$PWD/PortBindingManager/PortBindingManager.h \
+    $$PWD/Port/PortBindingManager.h \
     $$PWD/Port/Port.h \
     $$PWD/Topology/autonomoussystem.h \
     $$PWD/Topology/topologybuilder.h \

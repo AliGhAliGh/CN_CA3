@@ -18,7 +18,6 @@
             "id": 1,
             "topology_type": ["Mesh", "Torus"],
             "scale": 4,
-            "as_gateways": [14, 15, 16],
             "dhcp_server": 5,
             "broken_routers": [7, 14],
             "gateways": [
@@ -44,8 +43,7 @@
         {
             "id": 2,
             "topology_type": "RingStar",
-            "scale": 1,
-            "as_gateways": [17, 18, 19],
+            "scale": 3,
             "dhcp_server": 23,
             "broken_routers": [23],
             "gateways": [
