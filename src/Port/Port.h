@@ -2,7 +2,6 @@
 #define PORT_H
 
 #include "src/Packets/packet.h"
-
 #include <QObject>
 
 class Port : public QObject
@@ -16,6 +15,10 @@ public:
 
     ~Port() override;
     bool isRouterPort();
+    uint8_t getPortNumber() const;
+    void setAsBGP();                // تنظیم پورت به عنوان BGP
+    void setBroken(bool isBroken);
+    bool isBroken() const;
 
 Q_SIGNALS:
     void packetSent(const PacketPtr_t &data);
@@ -28,10 +31,12 @@ public Q_SLOTS:
 private:
     uint8_t  m_number;
     uint64_t m_numberOfPacketsSent;
-    bool        m_isRouter;
-    AbstractIP *m_iP;
+    bool     m_isRouter;            // آیا پورت متعلق به روتر است؟
+    AbstractIP *m_iP;               // آدرس IP متصل به پورت
+    bool     m_isBGP;               // آیا پورت برای BGP تنظیم شده است؟
+    bool     m_isBroken;
 };
 
 typedef QSharedPointer<Port> PortPtr_t;
 
-#endif    // PORT_H
+#endif // PORT_H

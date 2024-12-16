@@ -5,29 +5,28 @@
 #include "src/Port/Port.h"
 
 #include <QObject>
+#include <QVector>
 
 class Router : public Node
 {
+    Q_OBJECT
+
 public:
     explicit Router(uint8_t id, QObject *parent = nullptr);
 
-    PortPtr_t getPort(int id);
-
-    PortPtr_t getFreePort();
-
+    PortPtr_t getPort(int id);    // دریافت یک پورت خاص
+    PortPtr_t getFreePort();      // دریافت یک پورت آزاد
     PortPtr_t setBGP();
-
     void      setBroken(bool isBroken = true);
 
+Q_SIGNALS:
+    void routerStatusChanged(uint8_t routerId, bool isBroken);
+
 private:
-    uint8_t            m_id;
-    QVector<PortPtr_t> m_ports;
-    /*    1
-     * 3     2
-     *    4
-     */
+    QVector<PortPtr_t> m_ports; // پورت‌های روتر
+    bool               m_isBroken;
 };
 
 typedef QSharedPointer<Router> RouterPtr_t;
 
-#endif    // ROUTER_H
+#endif // ROUTER_H
