@@ -1,15 +1,15 @@
 #include "Port.h"
 #include <QDebug>
 
-Port::Port(bool isRouter, AbstractIP *ip, uint8_t number, QObject *parent) :
+Port::Port(bool isRouter, IPPtr_t ip, uint8_t number, QObject *parent) :
     QObject {parent},
-    m_number {number},
-    m_iP {ip},
-    m_isRouter {isRouter},
-    m_isBGP {false},
-    m_isBroken {false},
     IsFree {true},
-    m_numberOfPacketsSent {0}
+    m_number {number},
+    m_numberOfPacketsSent {0},
+    m_isRouter {isRouter},
+    m_iP {ip},
+    m_isBGP {false},
+    m_isBroken {false}
 {
 }
 
@@ -31,7 +31,7 @@ void
 Port::setAsBGP()
 {
     m_isBGP = true;
-    IsFree = false;
+    IsFree  = false;
     qDebug() << "Port" << m_number << "is now configured for BGP.";
 }
 

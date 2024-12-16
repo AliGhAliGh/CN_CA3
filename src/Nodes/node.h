@@ -18,8 +18,12 @@ public:
 Q_SIGNALS:
     void packetSent(uint8_t nodeId);
     void packetReceived(uint8_t nodeId);
+
+protected Q_SLOTS:
+    virtual void tick(unsigned long long data);
+
 private:
-    uint8_t m_id; // شناسه گره
+    uint8_t m_id;
 };
 
 typedef QSharedPointer<Node> NodePtr_t;

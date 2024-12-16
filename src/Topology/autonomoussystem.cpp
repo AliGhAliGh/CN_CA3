@@ -28,3 +28,7 @@ AutonomousSystem::GetRouter(uint8_t id)
         if(node->getId() == id) return node.dynamicCast<Router>();
     return nullptr;
 }
+
+void
+AutonomousSystem::test()
+{}

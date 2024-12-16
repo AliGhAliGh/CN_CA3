@@ -1,14 +1,11 @@
 #include "router.h"
 #include <QDebug>
 
-Router::Router(uint8_t id, QObject *parent) :
-    Node {id, parent},
-    m_isBroken {false}
+Router::Router(uint bufferSize, uint8_t id, QObject *parent) :
+    Node {id, parent}, m_isBroken {false}, m_bufferSize {bufferSize}
 {
-    // ایجاد 4 پورت برای روتر
-    for (int i = 1; i <= 4; ++i) {
+    for(int i = 1; i <= 4; ++i)
         m_ports.append(PortPtr_t(new Port(true, nullptr, i, this)));
-    }
 }
 
 PortPtr_t
@@ -24,11 +21,8 @@ Router::getPort(int id)
 PortPtr_t
 Router::getFreePort()
 {
-    for (const auto &port : m_ports) {
-        if (port->IsFree) {
-            return port;
-        }
-    }
+    for(const auto &port : m_ports)
+        if(port->IsFree) return port;
     qDebug() << "Router" << getId() << ": No free ports available!";
     return nullptr;
 }
@@ -53,6 +47,21 @@ Router::setBroken(bool isBroken)
     for (const auto &port : m_ports) {
         port->setBroken(isBroken);
     }
-    Q_EMIT routerStatusChanged(getId(), isBroken);
+    // Q_EMIT routerStatusChanged(getId(), isBroken);
     qDebug() << "Router" << getId() << ": Status set to" << (isBroken ? "Broken" : "Operational");
 }
+
+void
+Router::test()
+{
+    // for(int i = 0; i < m_ports.size(); ++i)
+    //     m_ports[i]->sendPacket(PacketPtr_t(new Packet()));
+}
+
+void
+Router::run()
+{}
+
+void
+Router::tick(unsigned long long num)
+{}

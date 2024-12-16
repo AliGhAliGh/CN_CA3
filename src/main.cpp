@@ -27,7 +27,9 @@ int
 main(int argv, char* argc[])
 {
     QCoreApplication app(argv, argc);
-    EventsCoordinator::init(1'000);
+    //phase1
     applyConfig();
+    //phase2
+    EventsCoordinator::init(1'000);
     return app.exec();
 }

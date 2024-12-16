@@ -23,6 +23,8 @@ Q_SIGNALS:
 protected:
 };
 
+typedef QSharedPointer<AbstractIP> IPPtr_t;
+
 template <>
 class UT::IP<UT::IPVersion::IPv4> : public AbstractIP
 {

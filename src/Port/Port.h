@@ -11,14 +11,14 @@ class Port : public QObject
 public:
     bool IsFree;
 
-    explicit Port(bool isRouter, AbstractIP *ip, uint8_t number, QObject *parent = nullptr);
+    explicit Port(bool isRouter, IPPtr_t ip, uint8_t number, QObject *parent = nullptr);
 
     ~Port() override;
     bool isRouterPort();
     uint8_t getPortNumber() const;
-    void setAsBGP();                // تنظیم پورت به عنوان BGP
-    void setBroken(bool isBroken);
-    bool isBroken() const;
+    void    setAsBGP();
+    void    setBroken(bool isBroken);
+    bool    isBroken() const;
 
 Q_SIGNALS:
     void packetSent(const PacketPtr_t &data);
@@ -31,9 +31,9 @@ public Q_SLOTS:
 private:
     uint8_t  m_number;
     uint64_t m_numberOfPacketsSent;
-    bool     m_isRouter;            // آیا پورت متعلق به روتر است؟
-    AbstractIP *m_iP;               // آدرس IP متصل به پورت
-    bool     m_isBGP;               // آیا پورت برای BGP تنظیم شده است؟
+    bool     m_isRouter;
+    IPPtr_t  m_iP;
+    bool     m_isBGP;
     bool     m_isBroken;
 };
 

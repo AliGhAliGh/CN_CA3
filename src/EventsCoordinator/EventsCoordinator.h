@@ -23,10 +23,10 @@ public:    // getter and setters
 Q_SIGNALS:
     void global_tick(unsigned long long num);
 
-public Q_SLOTS:
+private Q_SLOTS:
     void clock();
 
-private Q_SLOTS:
+public Q_SLOTS:
 
 private:
     explicit EventsCoordinator(QThread *parent = nullptr);
