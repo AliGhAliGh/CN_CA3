@@ -31,4 +31,6 @@ AutonomousSystem::GetRouter(uint8_t id)
 
 void
 AutonomousSystem::test()
-{}
+{
+    // m_nodes[0].
+}

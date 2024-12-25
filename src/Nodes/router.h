@@ -11,7 +11,7 @@
 class Router : public Node
 {
 public:
-    explicit Router(uint bufferSize, uint8_t id, QObject *parent = nullptr);
+    explicit Router(uint8_t id, uint bufferSize = 100, QObject *parent = nullptr);
 
     PortPtr_t getPort(int id);
     PortPtr_t getFreePort();

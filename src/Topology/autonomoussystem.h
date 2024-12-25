@@ -19,6 +19,8 @@ public:
 
     RouterPtr_t GetRouter(uint8_t id);
 
+    void        test();
+
 Q_SIGNALS:
 
 private:

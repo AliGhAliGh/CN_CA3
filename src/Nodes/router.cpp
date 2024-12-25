@@ -1,7 +1,7 @@
 #include "router.h"
 #include <QDebug>
 
-Router::Router(uint bufferSize, uint8_t id, QObject *parent) :
+Router::Router(uint8_t id, uint bufferSize, QObject *parent) :
     Node {id, parent}, m_isBroken {false}, m_bufferSize {bufferSize}
 {
     for(int i = 1; i <= 4; ++i)
