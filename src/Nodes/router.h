@@ -2,8 +2,10 @@
 #define ROUTER_H
 
 #include "node.h"
+#include "src/IP/macaddress.h"
 #include "src/Port/Port.h"
 
+#include <QMap>
 #include <QObject>
 #include <QQueue>
 #include <QVector>
@@ -18,6 +20,7 @@ public:
     PortPtr_t setBGP();
     void      setBroken(bool isBroken = true);
     void      test();
+    void      sendOspf();
 
 protected:
     void run() override;
@@ -29,12 +32,13 @@ Q_SIGNALS:
     void routerStatusChanged(uint8_t routerId, bool isBroken);
 
 private:
-    QVector<PortPtr_t>  m_ports;
-    bool                m_isBroken;
-    QQueue<PacketPtr_t> m_buffer;
-    uint                m_bufferSize;
+    QVector<PortPtr_t>     m_ports;
+    bool                   m_isBroken;
+    QQueue<PacketPtr_t>    m_buffer;
+    uint                   m_bufferSize;
+    QMap<AbstractIP, Port> m_routingTable;
 };
 
 typedef QSharedPointer<Router> RouterPtr_t;
 
-#endif // ROUTER_H
+#endif    // ROUTER_H

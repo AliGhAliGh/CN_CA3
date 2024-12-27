@@ -1,5 +1,7 @@
 #include "autonomoussystem.h"
 
+#include "src/IP/macaddressgenerator.h"
+
 AutonomousSystem::AutonomousSystem(uint8_t id, QObject *parent) :
     QObject {parent}
 {
@@ -11,6 +13,7 @@ AutonomousSystem::SetRouters(QVector<RouterPtr_t> routers)
 {
     for(int i = 0; i < routers.size(); ++i)
     {
+        routers[i]->setMac(MacAddressGenerator::generate());
         m_nodes.append(routers[i]);
     }
 }

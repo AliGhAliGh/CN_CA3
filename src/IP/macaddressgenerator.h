@@ -1,6 +1,8 @@
 #ifndef MACADDRESSGENERATOR_H
 #define MACADDRESSGENERATOR_H
 
+#include "macaddress.h"
+
 #include <QObject>
 
 class MacAddressGenerator : public QObject
@@ -10,9 +12,12 @@ class MacAddressGenerator : public QObject
 public:
     explicit MacAddressGenerator(QObject *parent = nullptr);
 
-    static char *generate();
+    static MacAddress* generate();
 
-Q_SIGNALS:
+    static MacAddress* broadcastMac();
+
+private:
+    static QVector<MacAddress*> m_generated;
 };
 
 #endif    // MACADDRESSGENERATOR_H

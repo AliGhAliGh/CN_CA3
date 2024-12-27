@@ -14,10 +14,16 @@ public:
 
     std::string to_string();
 
+    bool
+    operator==(const MacAddress &other) const
+    {
+        return m_address == other.m_address;
+    }
+
 Q_SIGNALS:
 
 private:
-    std::bitset<48> address;
+    std::bitset<48> m_address;
 };
 
 #endif    // MACADDRESS_H

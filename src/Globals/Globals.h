@@ -2,10 +2,24 @@
 #define GLOBALS_H
 
 #include <cstdint>
+
+#include <QList>
 #include <QSharedPointer>
+
+class MacAddress;
+typedef QSharedPointer<MacAddress> MacAddressPtr_t;
 
 namespace UT
 {
+
+QByteArray
+concatQByteArrays(QByteArray, const QList<QByteArray> &byteArrays)
+{
+    QByteArray result;
+    for(const QByteArray &byteArray : byteArrays)
+        result += byteArray;
+    return result;
+}
 
 enum class IPVersion
 {
@@ -20,9 +34,6 @@ typedef IP<UT::IPVersion::IPv4> IPv4_t;
 typedef IP<UT::IPVersion::IPv6> IPv6_t;
 typedef QSharedPointer<IPv4_t>  IPv4Ptr_t;
 typedef QSharedPointer<IPv6_t>  IPv6Ptr_t;
-
-class MacAddress;
-typedef QSharedPointer<MacAddress> MacAddress_t;
 
 enum class PacketType
 {
@@ -97,8 +108,8 @@ struct TcpHeader
 
 struct DataLinkHeader
 {
-    MacAddress_t srcMac;
-    MacAddress_t dstMac;
+    MacAddressPtr_t srcMac;
+    MacAddressPtr_t dstMac;
 };
 }    // namespace UT
 

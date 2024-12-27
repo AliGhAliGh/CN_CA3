@@ -3,29 +3,35 @@
 
 #include "Globals.h"
 #include "src/IP/IP.h"
+#include "src/Nodes/node.h"
 
 #include <QObject>
+
+class Packet;
+
+typedef QSharedPointer<Packet> PacketPtr_t;
 
 class Packet : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit Packet(QObject *parent = nullptr);
+    explicit Packet(UT::PacketType type, QString payload, QObject *parent = nullptr);
+
+    static PacketPtr_t OspfPacket(NodePtr_t node);
 
 private:
-    UT::PacketType          type;
-    uint                    waiting_cycles;
-    uint                    total_cycles;
-    QByteArray              payload;
-    std::vector<AbstractIP> path;
-    UT::TcpHeader           tcpHeader;
-    void                   *ipHeader;
-    UT::DataLinkHeader      dataLinkHeader;
+    UT::PacketType          m_type;
+    uint                    m_waiting_cycles;
+    uint                    m_total_cycles;
+    QString                 m_payload;
+    std::vector<AbstractIP> m_path;
+    UT::TcpHeader           m_tcpHeader;
+    void                   *m_ipHeader;
+    UT::DataLinkHeader      m_dataLinkHeader;
+    bool                    m_isIpv4;
 
 Q_SIGNALS:
 };
-
-typedef QSharedPointer<Packet> PacketPtr_t;
 
 #endif    // PACKET_H

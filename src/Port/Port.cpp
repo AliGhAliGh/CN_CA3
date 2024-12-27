@@ -48,6 +48,12 @@ Port::isBroken() const
     return m_isBroken;
 }
 
+bool
+Port::isBgp()
+{
+    return m_isBGP;
+}
+
 void
 Port::sendPacket(const PacketPtr_t &data)
 {

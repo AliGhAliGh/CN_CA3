@@ -2,6 +2,7 @@
 #define PORT_H
 
 #include "src/Packets/packet.h"
+
 #include <QObject>
 
 class Port : public QObject
@@ -14,11 +15,12 @@ public:
     explicit Port(bool isRouter, IPPtr_t ip, uint8_t number, QObject *parent = nullptr);
 
     ~Port() override;
-    bool isRouterPort();
+    bool    isRouterPort();
     uint8_t getPortNumber() const;
     void    setAsBGP();
     void    setBroken(bool isBroken);
     bool    isBroken() const;
+    bool    isBgp();
 
 Q_SIGNALS:
     void packetSent(const PacketPtr_t &data);
@@ -39,4 +41,4 @@ private:
 
 typedef QSharedPointer<Port> PortPtr_t;
 
-#endif // PORT_H
+#endif    // PORT_H

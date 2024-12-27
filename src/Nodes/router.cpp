@@ -40,6 +40,8 @@ Router::setBGP()
     return nullptr;
 }
 
+
+
 void
 Router::setBroken(bool isBroken)
 {
@@ -56,6 +58,17 @@ Router::test()
 {
     // for(int i = 0; i < m_ports.size(); ++i)
     //     m_ports[i]->sendPacket(PacketPtr_t(new Packet()));
+}
+
+void
+Router::sendOspf()
+{
+    for(auto &port : m_ports)
+    {
+        if(port->isBgp()) continue;
+        auto packet = PacketPtr_t(Packet::OspfPacket(NodePtr_t(this)));
+        port->sendPacket(packet);
+    }
 }
 
 void
