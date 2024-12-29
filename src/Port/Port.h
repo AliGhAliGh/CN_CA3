@@ -2,6 +2,7 @@
 #define PORT_H
 
 #include "src/Packets/packet.h"
+// #include "src/Nodes/router.h"
 
 #include <QObject>
 
@@ -11,7 +12,6 @@ class Port : public QObject
 
 public:
     bool IsFree;
-
     explicit Port(bool isRouter, IPPtr_t ip, uint8_t number, QObject *parent = nullptr);
 
     ~Port() override;
@@ -21,6 +21,8 @@ public:
     void    setBroken(bool isBroken);
     bool    isBroken() const;
     bool    isBgp();
+    bool    isFree();
+    uint8_t getConnectedRouterId() const;
 
 Q_SIGNALS:
     void packetSent(const PacketPtr_t &data);

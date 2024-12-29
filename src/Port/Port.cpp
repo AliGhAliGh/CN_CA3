@@ -74,3 +74,9 @@ Port::receivePacket(const PacketPtr_t &data)
     }
     Q_EMIT packetReceived(data);
 }
+
+bool
+Port::isFree()
+{
+    return IsFree;
+}

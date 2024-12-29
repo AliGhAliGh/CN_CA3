@@ -40,6 +40,10 @@ Router::setBGP()
     return nullptr;
 }
 
+QList<PortPtr_t> Router::getPorts() const {
+    return m_ports;
+}
+
 
 
 void

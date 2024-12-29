@@ -20,6 +20,7 @@ SOURCES += \
     $$PWD/Packets/packet.cpp \
     $$PWD/Port/PortBindingManager.cpp \
     $$PWD/Port/Port.cpp \
+    $$PWD/RIP/rip.cpp \
     $$PWD/Topology/autonomoussystem.cpp \
     $$PWD/Topology/topologybuilder.cpp \
     $$PWD/main.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     $$PWD/Packets/packet.h \
     $$PWD/Port/PortBindingManager.h \
     $$PWD/Port/Port.h \
+    $$PWD/RIP/rip.h \
     $$PWD/Topology/autonomoussystem.h \
     $$PWD/Topology/topologybuilder.h \
     $$PWD/Nodes/node.h
