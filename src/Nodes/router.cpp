@@ -1,4 +1,5 @@
 #include "router.h"
+
 #include <QDebug>
 
 Router::Router(uint8_t id, uint bufferSize, QObject *parent) :
@@ -11,7 +12,8 @@ Router::Router(uint8_t id, uint bufferSize, QObject *parent) :
 PortPtr_t
 Router::getPort(int id)
 {
-    if (id > 0 && id <= m_ports.size()) {
+    if(id > 0 && id <= m_ports.size())
+    {
         return m_ports[id - 1];
     }
     qDebug() << "Router" << getId() << ": Invalid port ID" << id;
@@ -31,7 +33,8 @@ PortPtr_t
 Router::setBGP()
 {
     PortPtr_t bgpPort = getFreePort();
-    if (bgpPort) {
+    if(bgpPort)
+    {
         bgpPort->setAsBGP();
         qDebug() << "Router" << getId() << ": BGP activated on port" << bgpPort->getPortNumber();
         return bgpPort;
@@ -40,13 +43,18 @@ Router::setBGP()
     return nullptr;
 }
 
-
+void
+Router::setupDhcp(QString base)
+{
+    m_dhcp.init(IPPtr_t(new UT::IPv4_t(base)));
+}
 
 void
 Router::setBroken(bool isBroken)
 {
     m_isBroken = isBroken;
-    for (const auto &port : m_ports) {
+    for(const auto &port : m_ports)
+    {
         port->setBroken(isBroken);
     }
     // Q_EMIT routerStatusChanged(getId(), isBroken);
@@ -77,4 +85,8 @@ Router::run()
 
 void
 Router::tick(unsigned long long num)
+{}
+
+void
+Router::sendDhcpDiscover()
 {}

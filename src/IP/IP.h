@@ -32,7 +32,9 @@ public:    // constructors
     explicit IP(QObject *parent = nullptr);
     explicit IP(const QString &ipString, QObject *parent = nullptr);
     explicit IP(uint32_t ipValue, QObject *parent = nullptr);
+    explicit IP(std::bitset<32> ipValue, QObject *parent = nullptr);
     ~IP() override;
+    std::bitset<32> getData();
 
 public:    // methods
 
@@ -40,7 +42,7 @@ public:    // operators
     bool
     operator==(const IP<UT::IPVersion::IPv4> &other) const
     {
-        return value.to_string() == other.value.to_string();
+        return m_value.to_string() == other.m_value.to_string();
     }
 
     std::string to_string() const override;
@@ -48,7 +50,7 @@ public:    // operators
 private:    // methods
 
 private:
-    std::bitset<32> value;
+    std::bitset<32> m_value;
 };
 
 template <>

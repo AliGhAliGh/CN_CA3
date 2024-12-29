@@ -4,6 +4,7 @@
 #include "node.h"
 #include "src/IP/macaddress.h"
 #include "src/Port/Port.h"
+#include "src/algorithm/dhcp.h"
 
 #include <QMap>
 #include <QObject>
@@ -18,6 +19,7 @@ public:
     PortPtr_t getPort(int id);
     PortPtr_t getFreePort();
     PortPtr_t setBGP();
+    void      setupDhcp(QString base);
     void      setBroken(bool isBroken = true);
     void      test();
     void      sendOspf();
@@ -32,11 +34,15 @@ Q_SIGNALS:
     void routerStatusChanged(uint8_t routerId, bool isBroken);
 
 private:
+    void sendDhcpDiscover();
+
+private:
     QVector<PortPtr_t>     m_ports;
     bool                   m_isBroken;
     QQueue<PacketPtr_t>    m_buffer;
     uint                   m_bufferSize;
     QMap<AbstractIP, Port> m_routingTable;
+    DHCPServer             m_dhcp;
 };
 
 typedef QSharedPointer<Router> RouterPtr_t;

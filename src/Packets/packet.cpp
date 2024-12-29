@@ -9,10 +9,10 @@ createOSPFHeader(UT::IPv4Ptr_t srcIp, uint16_t payloadSize)
     header->versionHeaderLength = 20;
     header->typeOfService       = 0;
     header->totalLength         = 20 + payloadSize;
-    header->identification      = 0x1234;
-    header->flagsFragmentOffset = 0x4000;
+    header->identification      = 0;
+    header->flagsFragmentOffset = 0;
     header->ttl                 = 1;
-    header->protocol            = 89;
+    header->protocol            = 0;    //89;
     header->src                 = srcIp;
     header->dst                 = UT::IPv4Ptr_t(new UT::IPv4_t("0.0.0.0"));
     header->headerChecksum      = 0;

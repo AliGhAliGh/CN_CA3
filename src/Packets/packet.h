@@ -20,7 +20,7 @@ public:
 
     static PacketPtr_t OspfPacket(NodePtr_t node);
 
-private:
+protected:
     UT::PacketType          m_type;
     uint                    m_waiting_cycles;
     uint                    m_total_cycles;

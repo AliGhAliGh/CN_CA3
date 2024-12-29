@@ -7,20 +7,17 @@ AbstractIP::AbstractIP(QObject *parent) :
     QObject {parent}
 {}
 
-/**
- * ===========================================
- * ===========================================
- * ===========================================
- * @brief The IP class for IPv4.
- * ===========================================
- * ===========================================
- * ===========================================
- */
-
 UT::IP<UT::IPVersion::IPv4>::IP(QObject *parent) :
     AbstractIP(parent)
 {
-    value.set();
+    m_value.set();
+}
+
+UT::IP<UT::IPVersion::IPv4>::IP(std::bitset<32> ipValue, QObject *parent) :
+    AbstractIP(parent)
+
+{
+    m_value = ipValue;
 }
 
 UT::IP<UT::IPVersion::IPv4>::IP(const QString &ipString, QObject *parent) :
@@ -36,14 +33,14 @@ UT::IP<UT::IPVersion::IPv4>::IP(const QString &ipString, QObject *parent) :
         if(num > 255) throw new std::invalid_argument("Out Of Range Num!");
         auto bits = std::bitset<8>(num);
         for(int j = 0; j < 8; ++j)
-            value.set(8 * i + j, bits.test(j));
+            m_value.set(8 * i + j, bits.test(j));
     }
 }
 
 UT::IP<UT::IPVersion::IPv4>::IP(uint32_t ipValue, QObject *parent) :
     AbstractIP(parent)
 {
-    value = std::bitset<32>(ipValue);
+    m_value = std::bitset<32>(ipValue);
 }
 
 std::string
@@ -55,7 +52,7 @@ UT::IP<UT::IPVersion::IPv4>::to_string() const
     {
         std::stringstream temp;
         int               offset = 8 * i;
-        temp << ((value >> offset) & divider).to_ulong();
+        temp << ((m_value >> offset) & divider).to_ulong();
         res = temp.str() + res;
         if(i != 0) res = '.' + res;
     }
@@ -119,3 +116,9 @@ UT::IP<UT::IPVersion::IPv6>::to_string() const
 }
 
 UT::IP<UT::IPVersion::IPv6>::~IP() {};
+
+std::bitset<32>
+UT::IP<UT::IPVersion::IPv4>::getData()
+{
+    return m_value;
+}
