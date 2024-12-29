@@ -49,6 +49,12 @@ Router::setupDhcp(QString base)
     m_dhcp.init(IPPtr_t(new UT::IPv4_t(base)));
 }
 
+QList<PortPtr_t>
+Router::getPorts() const
+{
+    return m_ports;
+}
+
 void
 Router::setBroken(bool isBroken)
 {

@@ -23,6 +23,8 @@ public:
     void      setBroken(bool isBroken = true);
     void      test();
     void      sendOspf();
+    QList<PortPtr_t> getPorts() const;
+
 
 protected:
     void run() override;
